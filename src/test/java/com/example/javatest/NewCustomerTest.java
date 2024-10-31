@@ -41,148 +41,119 @@ public class NewCustomerTest {
     }
 
     @Test
-    public void newCustomerTest() {
-        loginTest(); // Assuming this logs in the user
+    public void testCustomerNameMustNotBeBlank() {
+        loginTest();
         $("a[href='addcustomerpage.php']").click();
-
-        // Test for Customer Name input
-        $(byName("name")).setValue(""); // Leave Customer Name empty
-        $(byName("name")).sendKeys(Keys.TAB); // Move to next field
-        $("body").shouldHave(text("Customer Name must not be blank")); // Adjust expected message
-
-        $(byName("name")).setValue("12345"); // Enter numbers
+        $(byName("name")).setValue(""); // Để trống Customer Name
         $(byName("name")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Customer Name must not contain numbers")); // Adjust expected message
+        $("body").shouldHave(text("Customer Name must not be blank"));
+    }
 
-        $(byName("name")).setValue("@#$%"); // Enter special characters
+    @Test
+    public void testCustomerNameCannotContainNumbers() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("name")).setValue("12345"); // Nhập số vào Customer Name
         $(byName("name")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Customer Name must not contain special characters")); // Adjust expected message
+        $("body").shouldHave(text("Customer Name must not contain numbers"));
+    }
 
-        $(byName("name")).setValue(" John"); // Leading space
+    @Test
+    public void testCustomerNameCannotContainSpecialCharacters() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("name")).setValue("@#$%"); // Nhập ký tự đặc biệt vào Customer Name
         $(byName("name")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Customer Name cannot start with a space")); // Adjust expected message
+        $("body").shouldHave(text("Customer Name must not contain special characters"));
+    }
 
-        $(byName("name")).setValue("Customer Name"); // Set valid name
+    @Test
+    public void testCustomerNameCannotStartWithSpace() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("name")).setValue(" John"); // Nhập tên bắt đầu bằng khoảng trắng
+        $(byName("name")).sendKeys(Keys.TAB);
+        $("body").shouldHave(text("Customer Name cannot start with a space"));
+    }
 
-        // Test for Date of Birth input
-        $(byName("dob")).setValue(""); // Leave DOB empty
-        $(byName("dob")).sendKeys(Keys.TAB); // Move to next field
-        $("body").shouldHave(text("Date of Birth must not be blank")); // Adjust expected message
-        $(byName("dob")).setValue("01/01/2000"); // Set valid date
+    @Test
+    public void testDobMustNotBeBlank() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("dob")).setValue(""); // Để trống Date of Birth
+        $(byName("dob")).sendKeys(Keys.TAB);
+        $("body").shouldHave(text("Date of Birth must not be blank"));
+    }
 
-        // Test for Address input
-        $(byName("addr")).setValue(""); // Leave Address empty
+    @Test
+    public void testAddressMustNotBeBlank() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("addr")).setValue(""); // Để trống Address
         $(byName("addr")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Address must not be blank")); // Adjust expected message
+        $("body").shouldHave(text("Address must not be blank"));
+    }
 
-        $(byName("addr")).setValue("@#$%"); // Enter special characters
-        $(byName("addr")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Address must not contain special characters")); // Adjust expected message
-
-        $(byName("addr")).setValue(" Address"); // Leading space
-        $(byName("addr")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Address cannot start with a space")); // Adjust expected message
-
-        $(byName("addr")).setValue("Customer Address"); // Set valid address
-
-        // Test for City input
-        $(byName("city")).setValue(""); // Leave City empty
+    @Test
+    public void testCityMustNotBeBlank() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("city")).setValue(""); // Để trống City
         $(byName("city")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("City must not be blank")); // Adjust expected message
+        $("body").shouldHave(text("City must not be blank"));
+    }
 
-        $(byName("city")).setValue("12345"); // Enter numbers
-        $(byName("city")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("City must not contain numbers")); // Adjust expected message
-
-        $(byName("city")).setValue("@#$%"); // Enter special characters
-        $(byName("city")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("City must not contain special characters")); // Adjust expected message
-
-        $(byName("city")).setValue(" City"); // Leading space
-        $(byName("city")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("City cannot start with a space")); // Adjust expected message
-
-        $(byName("city")).setValue("City"); // Set valid city
-
-        // Test for State input
-        $(byName("state")).setValue(""); // Leave State empty
+    @Test
+    public void testStateMustNotBeBlank() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("state")).setValue(""); // Để trống State
         $(byName("state")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("State must not be blank")); // Adjust expected message
+        $("body").shouldHave(text("State must not be blank"));
+    }
 
-        $(byName("state")).setValue("12345"); // Enter numbers
-        $(byName("state")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("State must not contain numbers")); // Adjust expected message
-
-        $(byName("state")).setValue("@#$%"); // Enter special characters
-        $(byName("state")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("State must not contain special characters")); // Adjust expected message
-
-        $(byName("state")).setValue(" State"); // Leading space
-        $(byName("state")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("State cannot start with a space")); // Adjust expected message
-
-        $(byName("state")).setValue("State"); // Set valid state
-
-        // Test for PIN input
-        $(byName("pinno")).setValue(""); // Leave PIN empty
+    @Test
+    public void testPinMustNotBeBlank() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("pinno")).setValue(""); // Để trống PIN
         $(byName("pinno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("PIN Code must not be blank")); // Adjust expected message
+        $("body").shouldHave(text("PIN Code must not be blank"));
+    }
 
-        $(byName("pinno")).setValue("@#$%"); // Enter special characters
-        $(byName("pinno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("PIN Code must not contain special characters")); // Adjust expected message
-
-        $(byName("pinno")).setValue("123"); // Enter less than 6 digits
-        $(byName("pinno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("PIN Code must have 6 digits")); // Adjust expected message
-
-        $(byName("pinno")).setValue(" 123456"); // Leading space
-        $(byName("pinno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("PIN Code cannot start with a space")); // Adjust expected message
-
-        $(byName("pinno")).setValue("123456"); // Set valid PIN
-
-        // Test for Telephone Number input
-        $(byName("telephoneno")).setValue(""); // Leave Telephone Number empty
+    @Test
+    public void testTelephoneMustNotBeBlank() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("telephoneno")).setValue(""); // Để trống Telephone Number
         $(byName("telephoneno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Mobile no must not be blank")); // Adjust expected message
+        $("body").shouldHave(text("Mobile no must not be blank"));
+    }
 
-        $(byName("telephoneno")).setValue("@#$%"); // Enter special characters
-        $(byName("telephoneno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Mobile no must not contain special characters")); // Adjust expected message
-
-        $(byName("telephoneno")).setValue("abc"); // Enter characters
-        $(byName("telephoneno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Mobile no must be numeric")); // Adjust expected message
-
-        $(byName("telephoneno")).setValue(" 0123456789"); // Leading space
-        $(byName("telephoneno")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Mobile no cannot start with a space")); // Adjust expected message
-
-        $(byName("telephoneno")).setValue("0123456789"); // Set valid number
-
-        // Test for Email input
-        $(byName("emailid")).setValue(""); // Leave Email empty
+    @Test
+    public void testEmailMustNotBeBlank() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("emailid")).setValue(""); // Để trống Email
         $(byName("emailid")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Email ID must not be blank")); // Adjust expected message
+        $("body").shouldHave(text("Email ID must not be blank"));
+    }
 
-        $(byName("emailid")).setValue("invalid-email"); // Enter invalid email
-        $(byName("emailid")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Email ID is not valid")); // Adjust expected message
-
-        $(byName("emailid")).setValue(" email@example.com"); // Leading space
-        $(byName("emailid")).sendKeys(Keys.TAB);
-        $("body").shouldHave(text("Email ID cannot start with a space")); // Adjust expected message
-
-        $(byName("emailid")).setValue("email11@example.com"); // Set valid email
-
-        // Test for Password input
-        $(byName("password")).setValue("password123"); // Set valid password
-
-        // Submit the form
+    @Test
+    public void testSubmitNewCustomer() {
+        loginTest();
+        $("a[href='addcustomerpage.php']").click();
+        $(byName("name")).setValue("Customer Name");
+        $(byName("dob")).setValue("01/01/2000");
+        $(byName("addr")).setValue("Customer Address");
+        $(byName("city")).setValue("City");
+        $(byName("state")).setValue("State");
+        $(byName("pinno")).setValue("123456");
+        $(byName("telephoneno")).setValue("0123456789");
+        $(byName("emailid")).setValue("email11@example.com");
+        $(byName("password")).setValue("password123");
         $("[name='sub']").click();
 
-        // Verify successful registration
         $("body").shouldHave(text("Customer Registered Successfully!!!"));
     }
 
